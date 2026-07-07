@@ -10,8 +10,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/surajpandey95'
-                /employee-service.git'
+                git branch: 'main', url: 'https://github.com/surajpandey95/employee-service.git'
             }
         }
 
@@ -31,8 +30,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarServer') {
                     sh '''
-                    mvn sonar:sonar \
-                    -Dsonar.projectKey=employee-service
+                        mvn sonar:sonar \
+                        -Dsonar.projectKey=employee-service
                     '''
                 }
             }
