@@ -63,7 +63,7 @@ pipeline {
         }
         stage('DOcker Push') {
             steps {
-                sh 'docker push surajdemo1/employee-service:v1'
+                sh 'docker push surajdemo1/employee-service:${BUILD_NUMBER}'
             }
         }
 
