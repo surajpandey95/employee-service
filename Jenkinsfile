@@ -61,7 +61,7 @@ pipeline {
                 sh 'docker build -t surajdemo1/employee-service:${BUILD_NUMBER} .'
             }
         }
-        stage('DOcker Push') {
+        stage('Docker Push') {
             steps {
                 sh 'docker push surajdemo1/employee-service:${BUILD_NUMBER}'
             }
