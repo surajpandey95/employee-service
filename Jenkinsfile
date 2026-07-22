@@ -44,7 +44,7 @@ pipeline {
         stage("Quality Gates") {
             steps{
                 timeout(time:5,unit:'MINUTES'){
-                    waitForQualityGate abortPipelinie: true
+                    waitForQualityGate abortPipeline: true
                 }
             }
 
@@ -54,6 +54,6 @@ pipeline {
                 sh 'docker build -t employee-service:v1 .'
             }
         }
-        
+
     }
 }
