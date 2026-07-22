@@ -54,6 +54,11 @@ pipeline {
                 sh 'docker build -t employee-service:v1 .'
             }
         }
+        stage('Docker Build') {
+            steps{
+                sh 'docker build -t employee-service:v1 .'
+            }
+        }
 
     }
 }
