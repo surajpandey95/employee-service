@@ -49,17 +49,17 @@ pipeline {
             }
 
         }
-        stage('Docker Build'){
-            steps{
-                sh 'docker build -t surajdemo1/employee-service:v1 .'
-            }
-        }
-        stage('Docker Login') {
+                stage('Docker Login') {
             steps{
                 withCredentials ([usernamePassword (credentialsId: 'dockerhub-creds',usernameVariable: 'DOCKER_USER',passwordVariable: 'DOCKER_PASS')]) {
                 sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
             }
           }
+        }
+        stage('Docker Build'){
+            steps{
+                sh 'docker build -t surajdemo1/employee-service:v1 .'
+            }
         }
         stage('DOcker Push') {
             steps {
