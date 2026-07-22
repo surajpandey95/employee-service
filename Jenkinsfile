@@ -25,6 +25,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage ("Package") {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
 
         stage('SonarQube Analysis') {
             steps {
@@ -36,5 +41,19 @@ pipeline {
                 }
             }
         }
+        stage("Quality Gates") {
+            steps{
+                timeout(time:5,unit:'MINUTES'){
+                    waitForQualityGate abortPipelinie: true
+                }
+            }
+
+        }
+        stage('Docker Build'){
+            steps{
+                sh 'docker build -t employee-service:v1 .'
+            }
+        }
+        
     }
 }
