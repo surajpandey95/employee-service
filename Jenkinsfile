@@ -77,7 +77,7 @@ pipeline {
         trivy image \
         --exit-code 1 \
         --severity CRITICAL \
-        employee-service:v1
+        employee-service:${BUILD_NUMBER}
         '''
     }
 }
