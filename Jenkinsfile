@@ -71,14 +71,15 @@ pipeline {
                 sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
             }
         }
-         stage('Trivy Scan'){
-            steps{
-                sh '''
-docker system prune -af || true
-docker volume prune -f || true
-rm -rf ~/.cache/trivy || true
-'''
-            }
-        }
+         stage('Trivy Scan') {
+    steps {
+        sh '''
+        trivy image \
+        --exit-code 1 \
+        --severity CRITICAL \
+        employee-service:v1
+        '''
+    }
+}
     }
 }
