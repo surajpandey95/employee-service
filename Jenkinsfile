@@ -61,21 +61,21 @@ pipeline {
                 sh 'docker build --no-cache -t surajdemo1/employee-service:${BUILD_NUMBER} .'
             }
         }
-        stage('Cleanup'){
-            steps{
-                sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
-            }
-        }
          stage('Trivy Scan') {
     steps {
         sh '''
-        trivy image --exit-code 1 --severity CRITICAL  employee-service:${BUILD_NUMBER}
+        trivy image --exit-code 1 --severity CRITICAL  surajdemo1/employee-service:${BUILD_NUMBER}
         '''
     }
 }
 stage('Docker Push') {
             steps {
                 sh 'docker push surajdemo1/employee-service:${BUILD_NUMBER}'
+            }
+        }
+        stage('Cleanup'){
+            steps{
+                sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
             }
         }
     }
