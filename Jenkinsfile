@@ -61,14 +61,14 @@ pipeline {
                 sh 'docker build -t surajdemo1/employee-service:${BUILD_NUMBER} .'
             }
         }
-                stage('Trivy Scan'){
-            steps{
-                sh ''' trivy image --exit-code 1 --severity CRITICAL surajdemo1/employee-service:${BUILD_NUMBER} '''
-            }
-        }
         stage('Docker Push') {
             steps {
                 sh 'docker push surajdemo1/employee-service:${BUILD_NUMBER}'
+            }
+        }
+         stage('Trivy Scan'){
+            steps{
+                sh ''' trivy image --exit-code 1 --severity CRITICAL surajdemo1/employee-service:${BUILD_NUMBER} '''
             }
         }
     }
