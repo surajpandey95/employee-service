@@ -61,6 +61,11 @@ pipeline {
                 sh 'docker build --no-cache -t surajdemo1/employee-service:${BUILD_NUMBER} .'
             }
         }
+        stage('Cleanup'){
+            steps{
+                sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
+            }
+        }
          stage('Trivy Scan') {
             steps {
                 sh '''
@@ -79,11 +84,6 @@ pipeline {
                 kubectl apply -f k8s-manifests/deployment.yaml
                 kubectl apply -f k8s-manifests/service.yaml
                 '''
-            }
-        }
-        stage('Cleanup'){
-            steps{
-                sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
             }
         }
     }
