@@ -70,14 +70,14 @@ pipeline {
              '''
             }
        }
-       stage('Cleanup'){
-            steps{
-                sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
-            }
-        }
         stage('Docker Push') {
             steps {
                 sh 'docker push surajdemo1/employee-service:${BUILD_NUMBER}'
+            }
+        }
+        stage('Cleanup'){
+            steps{
+                sh ''' docker system prune -af ||true docker volume prune -f || true rm -rf ~/.cache/trivy || true '''
             }
         }
         stage('Deploy to EKS') {
