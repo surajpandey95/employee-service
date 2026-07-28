@@ -64,6 +64,8 @@ pipeline {
          stage('Trivy Scan') {
             steps {
                 sh '''
+                mkdir -p /var/lib/jenkins/trivy-tmp
+                export TMPDIR=/var/lib/jenkins/trivy-tmp
              trivy image --exit-code 1 --severity CRITICAL  surajdemo1/employee-service:${BUILD_NUMBER}
              '''
             }
