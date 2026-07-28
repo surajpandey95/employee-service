@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: employee-deployment
+  labels:
+    app: employee-app
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: employee-app
+
+  template:
+    metadata:
+      labels:
+        app: employee-app
+
+    spec:
+      containers:
+      - name: employee-container
+        image: surajdemo1/employee-service:IMAGE_TAG
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 8080

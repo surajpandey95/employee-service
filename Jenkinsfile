@@ -83,8 +83,8 @@ pipeline {
         stage('Deploy to EKS') {
             steps{
                 sh '''
-                kubectl apply -f k8s-manifests/deployment.yaml
-                kubectl apply -f k8s-manifests/service.yaml
+                kubectl apply -f K8s-manifests/deployment.yaml
+                kubectl apply -f K8s-manifests/service.yaml
                 '''
             }
         }
